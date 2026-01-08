@@ -15,14 +15,14 @@ const { Pool } = pg.default;
 //   - Password = ไม่ต้องใส่ (ถ้า pgAdmin 4 เวอร์ชัน 7.2+ จะใช้ macOS Keychain)
 //   - Hostname = localhost
 //   - Database name = postgres_database
-//   - ตัวอย่าง: "postgresql://<yourmacusername>@<hostname>:5432/<database_name>"
+//   - ตัวอย่าง: "postgresql://<yourmacusername>@localhost:5432/<database_name>"
 //
 // หมายเหตุ: วิธีการตรวจสอบเวอร์ชัน pgAdmin 4 คือ คลิกที่เมนูบาร์ "pgAdmin 4" ด้านบนสุดของหน้าจอ -> "About pgAdmin 4" -> "Version"
 
 // แก้ไขโค้ดเพื่อให้เชื่อมต่อกับ Database ได้ข้างล่างนี้ 🔽🔽🔽
 const pool = new Pool({
 	connectionString:
-		"postgresql://<username>:<password>@<hostname>:5432/<database_name>",
+		"postgresql://postgres:78910123@localhost:5432/movies",
 });
 
 export { pool };
