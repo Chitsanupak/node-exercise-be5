@@ -11,3 +11,23 @@ app.use(express.json());
 app.listen(port, () => {
 	console.log(`🚀 Server is running at ${port}`);
 });
+
+app.post("/movies",  async (req, res) => {
+	  const newMovie = movies.json({
+		
+    "title": String,
+    "description": String,
+    "genres": String,
+    "year" : String,
+    "poster" : String,
+    "rating": String
+
+	  })
+	  return res(200).json({
+		message: "Movie has been created.",
+	  });if (!newMovie){
+		return res.status(400).json({
+			message: "error.message.",
+		});
+	  }	
+})
