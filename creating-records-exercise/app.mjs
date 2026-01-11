@@ -8,26 +8,32 @@ app.use(express.json());
 
 // 📍 **** สร้าง API เพื่อใช้ในการเพิ่มข้อมูลหนังเรื่องใหม่ไปที่ Database ตรงนี้ ****
 
-app.listen(port, () => {
-	console.log(`🚀 Server is running at ${port}`);
+app.post("/movies", async (req, res) => {
+  try {
+     const newMovie = {
+       ...req.body,
+     };
+     await pool.query(
+       `insert into movies ( title, description, genres, year, poster, rating)
+       values ($1, $2, $3, $4, $5, $6)`,
+       [
+         newMovie.title,
+         newMovie.description,
+         newMovie.genres,
+         newMovie.year,
+         newMovie.poster,
+         newMovie.rating,
+       ]
+     );
+     return res.json({
+       message: "Movie has been created.",
+     });
+  } catch (err) {
+    return res.json({
+      message: e.message,
+    });
+  }
 });
-
-app.post("/movies",  async (req, res) => {
-	  const newMovie = movies.json({
-		
-    "title": String,
-    "description": String,
-    "genres": String,
-    "year" : String,
-    "poster" : String,
-    "rating": String
-
-	  })
-	  return res(200).json({
-		message: "Movie has been created.",
-	  });if (!newMovie){
-		return res.status(400).json({
-			message: "error.message.",
-		});
-	  }	
-})
+app.listen(port, () => {
+  console.log(`🚀 Server is running at ${port}`);
+});
